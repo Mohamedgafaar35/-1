@@ -1,0 +1,71 @@
+```python
+#
+class Block:
+    def __init__(self, data, previous_hash):
+        self.data = data
+        self.previous_hash = previous_hash
+        self.hash = self.calculate_hash()
+
+    def calculate_hash(self):
+        # SHA-256
+        return hashlib.sha256(self.data.encode('utf-8')).hexdigest()
+
+# 
+class Blockchain:
+    def __init__(self):
+        self.chain = [self.create_genesis_block()]
+
+    def create_genesis_block(self):
+        # 
+        return Block("0000", "0")
+
+    def add_block(self, block):
+        #
+        self.chain.append(block)
+
+# 
+class Transaction:
+    def __init__(self, sender, recipient, amount):
+        self.sender = sender
+        self.recipient = recipient
+        self.amount = amount
+
+# 
+class Wallet:
+    def __init__(self):
+        self.balance = 0
+
+# 
+def mine_block(blockchain):
+    # 
+    new_block = Block(blockchain.chain[-1].hash, [])
+
+    # while True:
+        new_block.hash = new_block.calculate_hash()
+        if new_block.hash[:4] == '00000':  
+            break
+
+    #
+blockchain.add_block(new_block)
+
+#
+wallet_a = Wallet()
+wallet_a.balance = 1000
+
+# 
+wallet_b = Wallet()
+wallet_b.balance = 500
+
+#
+transaction = Transaction(wallet_a, wallet_b, 20)
+
+# 
+blockchain = Blockchain()
+
+#
+mine_block(blockchain)
+
+# 
+print(" 1000:", wallet_a.balance)  # 80
+print("500:", wallet_b.balance)  # 70
+```
